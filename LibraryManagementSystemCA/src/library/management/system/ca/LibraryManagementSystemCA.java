@@ -1,6 +1,10 @@
 
 package library.management.system.ca;
 
+import Database.Database;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -14,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+
 
 public class LibraryManagementSystemCA extends Application {
 
@@ -40,7 +45,7 @@ public class LibraryManagementSystemCA extends Application {
             
             @Override
             public void handle(ActionEvent event) {
-                 
+                
             }
         });
         
