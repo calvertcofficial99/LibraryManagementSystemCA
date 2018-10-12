@@ -16,16 +16,7 @@ import java.sql.SQLException;
  */
 public class Person {
     
-    public int person_id;
-    public String person_name;
-    public String email;
-    public String address;
-     
-    public Person(String person_name, String email, String address){
-        this.person_name=person_name;
-        this.email=email;
-        this.address=address;
-    }
+
     
     public static void insertPerson(String person_name,String email,String address, Connection con) throws SQLException {
         String sql = "insert into person values(null, ?, ?, ?);";

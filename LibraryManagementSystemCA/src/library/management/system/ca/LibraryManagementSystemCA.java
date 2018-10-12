@@ -119,9 +119,9 @@ public class LibraryManagementSystemCA extends Application {
         TextField p_name = new TextField();
         TextField bk_name = new TextField();
 
-        Label per_name = new Label("NAME: ");
-        Label bok_name = new Label("BOOK NAME: ");
-        Label borrow_d = new Label("BORROWED ON:");
+        Label per_id = new Label("Person id: ");
+        Label bok_id = new Label("book id: ");
+        Label borrow_id = new Label("borrows id : ");
 
         Button btn3 = new Button("SUBMIT");
 
@@ -129,11 +129,11 @@ public class LibraryManagementSystemCA extends Application {
 
         Tab tab3 = new Tab("BORROW A BOOK");
         GridPane gp2 = new GridPane();
-        gp2.add(per_name, 0, 0);
+        gp2.add(per_id, 0, 0);
         gp2.add(p_name, 1, 0);
-        gp2.add(bok_name, 0, 1);
+        gp2.add(bok_id , 0, 1);
         gp2.add(bk_name, 1, 1);
-        gp2.add(borrow_d, 0, 2);
+        gp2.add(borrow_id, 0, 2);
         gp2.add(dp, 1, 2);
         gp2.add(btn3, 1, 3);
         gp2.setHgap(30);

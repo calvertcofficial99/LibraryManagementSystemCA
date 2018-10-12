@@ -15,18 +15,7 @@ import java.sql.SQLException;
  * @author Rahul
  */
 public class Book {
-    public int book_id;
-    public String book_name;
-    public String ISBN;
-    public String author;
-    public String publisher;
-     
-    public Book(String book_name, String ISBN, String author, String publisher){
-        this.book_name=book_name;
-        this.ISBN=ISBN;
-        this.author=author;
-        this.publisher=publisher;
-    }
+
     
     public static void insertBook(String bookName, String ISBN, String author, String publisher, Connection con) throws SQLException {
         String sql = "insert into book values(null, ?, ?, ?, ?);";
