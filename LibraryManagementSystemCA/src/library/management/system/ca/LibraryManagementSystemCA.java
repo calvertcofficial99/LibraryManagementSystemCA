@@ -73,10 +73,10 @@ public class LibraryManagementSystemCA extends Application {
                 //Code for book tab:
                 
                 
-        TextField b_name = new TextField();
-        TextField b_isbn = new TextField();
-        TextField b_auth = new TextField();
-        TextField b_pub = new TextField();
+        TextField tfBookName = new TextField();
+        TextField tfISBN = new TextField();
+        TextField tfAuth = new TextField();
+        TextField tfPubG = new TextField();
 
         Label book_name = new Label("NAME: ");
         Label book_isbn = new Label("ISBN: ");
@@ -88,18 +88,30 @@ public class LibraryManagementSystemCA extends Application {
         Tab tab2 = new Tab("BOOK");
         GridPane gp1 = new GridPane();
         gp1.add(book_name, 0, 0);
-        gp1.add(b_name, 1, 0);
+        gp1.add(tfBookName, 1, 0);
         gp1.add(book_isbn, 0, 1);
-        gp1.add(b_isbn, 1, 1);
+        gp1.add(tfISBN, 1, 1);
         gp1.add(book_auth, 0, 2);
-        gp1.add(b_auth, 1, 2);
+        gp1.add(tfAuth, 1, 2);
         gp1.add(book_pub, 0, 3);
-        gp1.add(b_pub, 1, 3);
+        gp1.add(tfPubG, 1, 3);
         gp1.add(btn2, 1, 4);
         gp1.setHgap(30);
         gp1.setVgap(10);
         tab2.setContent(gp1);
         tb.getTabs().add(tab2);
+        
+        btn2.setOnAction(new EventHandler<ActionEvent>() {
+            
+            @Override
+            public void handle(ActionEvent event) {
+                String bookName = tfBookName.getText();
+                String isbn = tfISBN.getText();
+                String author = tfAuth.getText();
+                String publisher = tfPubG.getText();
+                Book.insertBook(bookName,isbn,author,publisher,d);
+            }
+        });
 
                 //Code for borrow tab:
                 
