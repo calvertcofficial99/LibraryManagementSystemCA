@@ -2,6 +2,8 @@
 package library.management.system.ca;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -33,7 +35,15 @@ public class LibraryManagementSystemCA extends Application {
         Tab tab1 = new Tab("PERSON");
 
         Button btn1 = new Button("SUBMIT");
-
+        
+        btn1.setOnAction(new EventHandler<ActionEvent>() {
+            
+            @Override
+            public void handle(ActionEvent event) {
+                 
+            }
+        });
+        
         GridPane gp = new GridPane();
         gp.add(person_name, 0, 0);
         gp.add(name, 1, 0);
@@ -106,7 +116,7 @@ public class LibraryManagementSystemCA extends Application {
         tab3.setContent(gp2);
         tb.getTabs().add(tab3);
 
-        //Code for return tab:
+                //Code for return tab:
         TextField pe_name = new TextField();
         TextField bkk_name = new TextField();
 
@@ -141,7 +151,7 @@ public class LibraryManagementSystemCA extends Application {
                 
         Scene scene = new Scene(root, 1000, 500);
 
-        primaryStage.setTitle("Hello World!");
+        primaryStage.setTitle("MyLibraryManagementSystemCA");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
