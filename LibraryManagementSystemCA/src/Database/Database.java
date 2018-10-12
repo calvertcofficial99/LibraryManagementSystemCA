@@ -8,7 +8,7 @@ import java.sql.SQLException;
 public class Database {
     Connection con;
     String password = "root";
-    String uri = "jdbc:mysql://localhost:3306/LibraryManagementSystem";
+    String uri = "jdbc:mysql://localhost:3306/LibraryManagementSystemCA";
     String user = "root";
     
     

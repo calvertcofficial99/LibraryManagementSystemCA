@@ -27,7 +27,7 @@ public class Person {
         this.address=address;
     }
     
-    public void insertPerson(Connection con) throws SQLException {
+    public static void insertPerson(String person_name,String email,String address, Connection con) throws SQLException {
         String sql = "insert into person values(null, ?, ?, ?);";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setString(1, person_name);

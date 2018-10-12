@@ -2,6 +2,8 @@
 package library.management.system.ca;
 
 import Database.Database;
+import Database.Book;
+import Database.Person;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,14 +25,14 @@ import javafx.stage.Stage;
 public class LibraryManagementSystemCA extends Application {
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws ClassNotFoundException, SQLException {
         
         
                 //Code for person tab:
 
-        TextField name = new TextField();
-        TextField roll = new TextField();
-        TextField add = new TextField();
+        TextField tfname = new TextField();
+        TextField tfroll = new TextField();
+        TextField tfadd = new TextField();
 
         Label person_name = new Label("NAME: ");
         Label person_roll = new Label("ROLL NO: ");
@@ -38,29 +40,35 @@ public class LibraryManagementSystemCA extends Application {
 
         TabPane tb = new TabPane();
         Tab tab1 = new Tab("PERSON");
-
-        Button btn1 = new Button("SUBMIT");
         
-        btn1.setOnAction(new EventHandler<ActionEvent>() {
-            
-            @Override
-            public void handle(ActionEvent event) {
-                
-            }
-        });
+        Database d = new Database();
+        d.openConnection();
+        
+        Button btn1 = new Button("SUBMIT");
         
         GridPane gp = new GridPane();
         gp.add(person_name, 0, 0);
-        gp.add(name, 1, 0);
+        gp.add(tfname, 1, 0);
         gp.add(person_roll, 0, 1);
-        gp.add(roll, 1, 1);
+        gp.add(tfroll, 1, 1);
         gp.add(person_add, 0, 2);
-        gp.add(add, 1, 2);
+        gp.add(tfadd, 1, 2);
         gp.add(btn1, 1, 3);
         gp.setHgap(30);
         gp.setVgap(10);
         tab1.setContent(gp);
         tb.getTabs().add(tab1);
+        
+        btn1.setOnAction(new EventHandler<ActionEvent>() {
+            
+            @Override
+            public void handle(ActionEvent event) {
+                String personName = tfname.getText();
+                String personRoll = tfroll.getText();
+                String personAdd = tfadd.getText();
+                Person.insertPerson(personName,personRoll,personAdd, d);
+            }
+        });
 
                 //Code for book tab:
                 
