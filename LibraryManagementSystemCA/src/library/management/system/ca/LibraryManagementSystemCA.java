@@ -43,7 +43,7 @@ public class LibraryManagementSystemCA extends Application {
         Tab tab1 = new Tab("PERSON");
         
         Database d = new Database();
-        Connection c = d.openConnection();
+        Connection con = d.openConnection();
         
         Button btn1 = new Button("SUBMIT");
         
@@ -68,7 +68,7 @@ public class LibraryManagementSystemCA extends Application {
                 String personRoll = tfroll.getText();
                 String personAdd = tfadd.getText();
                 try {
-                    Person.insertPerson(personName,personRoll,personAdd, c);
+                    Person.insertPerson(personName,personRoll,personAdd, con);
                 } catch (SQLException ex) {
                     Logger.getLogger(LibraryManagementSystemCA.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -115,7 +115,7 @@ public class LibraryManagementSystemCA extends Application {
                 String author = tfAuth.getText();
                 String publisher = tfPubG.getText();
                 try {
-                    Book.insertBook(bookName,isbn,author,publisher,c);
+                    Book.insertBook(bookName,isbn,author,publisher,con);
                 } catch (SQLException ex) {
                     Logger.getLogger(LibraryManagementSystemCA.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -185,7 +185,7 @@ public class LibraryManagementSystemCA extends Application {
                 
         Scene scene = new Scene(root, 1000, 500);
 
-        primaryStage.setTitle("MyLibraryManagementSystem");
+        primaryStage.setTitle("MyLibraryManagementSystemCA");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
