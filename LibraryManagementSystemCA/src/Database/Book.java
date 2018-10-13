@@ -20,13 +20,6 @@ public class Book {
     public String ISBN;
     public String author;
     public String publisher;
-     
-    public Book(String book_name, String ISBN, String author, String publisher){
-        this.book_name=book_name;
-        this.ISBN=ISBN;
-        this.author=author;
-        this.publisher=publisher;
-    }
     
     public void insertBook(Connection con) throws SQLException {
         String sql = "insert into book values(null, ?, ?, ?, ?);";

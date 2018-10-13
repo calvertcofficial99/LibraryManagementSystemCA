@@ -20,12 +20,7 @@ public class Borrow {
     public int person_id;
     public int book_id;
     public String borrowed_on;
-     
-    public Borrow(int person_id, int book_id, String borrowed_on){
-        this.person_id=person_id;
-        this.book_id=book_id;
-        this.borrowed_on=borrowed_on;
-    }
+
     
     public void insertBorrow(Connection con) throws SQLException {
         String sql = "insert into borrow values(null, ?, ?, null);";
