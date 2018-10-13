@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 public class Database {
     Connection con;
-    String uri = "jdbc:mysql://localhost:3306/LibraryManagementSystem";
+    String uri = "jdbc:mysql://localhost:3306/librarymanagementsystemca";
     String user = "root";
     String password = "root";
     
@@ -21,4 +21,5 @@ public class Database {
     public void closeConnection() throws SQLException{
     	con.close();
     }
+   
 }

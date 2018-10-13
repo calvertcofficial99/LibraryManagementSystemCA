@@ -19,27 +19,28 @@ public class Book {
     
     public static void insertBook(String bookName, String ISBN, String author, String publisher, Connection con) throws SQLException {
         String sql = "insert into book values(null, ?, ?, ?, ?);";
-        PreparedStatement ps = con.prepareStatement(sql);
-        ps.setString(1, bookName);
-        ps.setString(2, ISBN);
-        ps.setString(3, author);
-        ps.setString(4, publisher);
-        ps.executeUpdate();
-        ps.close();
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, bookName);
+            ps.setString(2, ISBN);
+            ps.setString(3, author);
+            ps.setString(4, publisher);
+            ps.executeUpdate();
+        }
                
     }
     
     public void getBook(Connection con) throws SQLException  {
         String sql = "select * from book;";
-        PreparedStatement ps = con.prepareStatement(sql);
-        ResultSet rs = ps.executeQuery();
-        while (rs.next()){
-            System.out.println(rs.getString(1));
-            System.out.println(rs.getString(2));
-            System.out.println(rs.getString(3));
-            System.out.println(rs.getString(4));
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                System.out.println(rs.getString(1));
+                System.out.println(rs.getString(2));
+                System.out.println(rs.getString(3));
+                System.out.println(rs.getString(4));
+            }
+            rs.close();
         }
-        rs.close();
-        ps.close();
     }
+    
 }

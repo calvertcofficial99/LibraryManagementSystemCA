@@ -14,7 +14,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -33,7 +32,7 @@ public class LibraryManagementSystemCA extends Application {
         TextField tfadd = new TextField();
 
         Label person_name = new Label("NAME: ");
-        Label person_roll = new Label("ROLL NO: ");
+        Label person_roll = new Label("email:  ");
         Label person_add = new Label("ADDRESS: ");
 
         TabPane tb = new TabPane();
@@ -126,7 +125,7 @@ public class LibraryManagementSystemCA extends Application {
 
         Button btn3 = new Button("SUBMIT");
 
-        DatePicker dp = new DatePicker();
+
 
         Tab tab3 = new Tab("BORROW A BOOK");
         GridPane gp2 = new GridPane();
@@ -135,7 +134,7 @@ public class LibraryManagementSystemCA extends Application {
         gp2.add(bok_id, 0, 1);
         gp2.add(bk_name, 1, 1);
         gp2.add(borrow_id, 0, 2);
-        gp2.add(dp, 1, 2);
+
         gp2.add(btn3, 1, 3);
         gp2.setHgap(30);
         gp2.setVgap(10);
@@ -168,7 +167,7 @@ public class LibraryManagementSystemCA extends Application {
 
         Button btn4 = new Button("SUBMIT");
 
-        DatePicker dp1 = new DatePicker();
+
 
         Tab tab4 = new Tab("RETURN A BOOK");
         GridPane gp3 = new GridPane();
@@ -179,7 +178,7 @@ public class LibraryManagementSystemCA extends Application {
         gp3.add(return_d, 0, 2);
         gp3.add(borrowID,0,3);
         gp3.add(tfBorrowId, 1, 3);
-        gp3.add(dp1, 1, 2);
+
         gp3.add(btn4, 1, 3);
         gp3.setHgap(30);
         gp3.setVgap(10);
