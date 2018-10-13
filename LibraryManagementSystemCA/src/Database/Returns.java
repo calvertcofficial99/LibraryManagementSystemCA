@@ -10,13 +10,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-/**
- *
- * @author Rahul
- */
+
 public class Returns {
     
-    public void insertReturns(int borrow_id, String returned_on, Connection con) throws SQLException {
+    public static void insertReturns(int borrow_id, Connection con) throws SQLException {
         String sql = "insert into returns values(null, ?, null);";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, borrow_id);

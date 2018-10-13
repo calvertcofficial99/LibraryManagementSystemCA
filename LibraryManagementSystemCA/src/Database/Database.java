@@ -7,9 +7,9 @@ import java.sql.SQLException;
 
 public class Database {
     Connection con;
-    String password = "root";
     String uri = "jdbc:mysql://localhost:3306/LibraryManagementSystem";
     String user = "root";
+    String password = "root";
     
     
     public Connection openConnection() throws ClassNotFoundException, SQLException {

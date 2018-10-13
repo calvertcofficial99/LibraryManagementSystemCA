@@ -1,9 +1,10 @@
-
 package library.management.system.ca;
 
 import Database.Database;
 import Database.Book;
+import Database.Borrow;
 import Database.Person;
+import Database.Returns;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -22,14 +23,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-
 public class LibraryManagementSystemCA extends Application {
 
     @Override
     public void start(Stage primaryStage) throws ClassNotFoundException, SQLException {
-        
-        
-                //Code for person tab:
 
         TextField tfname = new TextField();
         TextField tfroll = new TextField();
@@ -41,12 +38,12 @@ public class LibraryManagementSystemCA extends Application {
 
         TabPane tb = new TabPane();
         Tab tab1 = new Tab("PERSON");
-        
+
         Database d = new Database();
         Connection con = d.openConnection();
-        
+
         Button btn1 = new Button("SUBMIT");
-        
+
         GridPane gp = new GridPane();
         gp.add(person_name, 0, 0);
         gp.add(tfname, 1, 0);
@@ -59,25 +56,22 @@ public class LibraryManagementSystemCA extends Application {
         gp.setVgap(10);
         tab1.setContent(gp);
         tb.getTabs().add(tab1);
-        
+
         btn1.setOnAction(new EventHandler<ActionEvent>() {
-            
+
             @Override
             public void handle(ActionEvent event) {
                 String personName = tfname.getText();
                 String personRoll = tfroll.getText();
                 String personAdd = tfadd.getText();
                 try {
-                    Person.insertPerson(personName,personRoll,personAdd, con);
+                    Person.insertPerson(personName, personRoll, personAdd, con);
                 } catch (SQLException ex) {
                     Logger.getLogger(LibraryManagementSystemCA.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
 
-                //Code for book tab:
-                
-                
         TextField tfBookName = new TextField();
         TextField tfISBN = new TextField();
         TextField tfAuth = new TextField();
@@ -105,9 +99,9 @@ public class LibraryManagementSystemCA extends Application {
         gp1.setVgap(10);
         tab2.setContent(gp1);
         tb.getTabs().add(tab2);
-        
+
         btn2.setOnAction(new EventHandler<ActionEvent>() {
-            
+
             @Override
             public void handle(ActionEvent event) {
                 String bookName = tfBookName.getText();
@@ -115,16 +109,14 @@ public class LibraryManagementSystemCA extends Application {
                 String author = tfAuth.getText();
                 String publisher = tfPubG.getText();
                 try {
-                    Book.insertBook(bookName,isbn,author,publisher,con);
+                    Book.insertBook(bookName, isbn, author, publisher, con);
                 } catch (SQLException ex) {
                     Logger.getLogger(LibraryManagementSystemCA.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
 
-                //Code for borrow tab:
-                
-                
+
         TextField p_name = new TextField();
         TextField bk_name = new TextField();
 
@@ -140,7 +132,7 @@ public class LibraryManagementSystemCA extends Application {
         GridPane gp2 = new GridPane();
         gp2.add(per_id, 0, 0);
         gp2.add(p_name, 1, 0);
-        gp2.add(bok_id , 0, 1);
+        gp2.add(bok_id, 0, 1);
         gp2.add(bk_name, 1, 1);
         gp2.add(borrow_id, 0, 2);
         gp2.add(dp, 1, 2);
@@ -150,13 +142,29 @@ public class LibraryManagementSystemCA extends Application {
         tab3.setContent(gp2);
         tb.getTabs().add(tab3);
 
-                //Code for return tab:
+        btn3.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                int pId = Integer.parseInt(per_id.getText());
+                int bor_id = Integer.parseInt(borrow_id.getText());
+                try {
+                    Borrow.insertBorrow(pId, bor_id, con);
+                } catch (SQLException ex) {
+                    Logger.getLogger(LibraryManagementSystemCA.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+
+
         TextField pe_name = new TextField();
         TextField bkk_name = new TextField();
+        TextField tfBorrowId = new TextField();
 
-        Label pers_name = new Label("NAME: ");
-        Label boook_name = new Label("BOOK NAME: ");
-        Label return_d = new Label("RETURNED ON:");
+        Label persId = new Label("PERSON ID: ");
+        Label boookId = new Label("BOOK ID: ");
+        Label borrowID = new Label("Enter Borrow ID: ");
+        Label return_d = new Label("RETURNED ON: ");
 
         Button btn4 = new Button("SUBMIT");
 
@@ -164,25 +172,36 @@ public class LibraryManagementSystemCA extends Application {
 
         Tab tab4 = new Tab("RETURN A BOOK");
         GridPane gp3 = new GridPane();
-        gp3.add(pers_name, 0, 0);
+        gp3.add(persId, 0, 0);
         gp3.add(pe_name, 1, 0);
-        gp3.add(boook_name, 0, 1);
+        gp3.add(boookId, 0, 1);
         gp3.add(bkk_name, 1, 1);
         gp3.add(return_d, 0, 2);
+        gp3.add(borrowID,0,3);
+        gp3.add(tfBorrowId, 1, 3);
         gp3.add(dp1, 1, 2);
         gp3.add(btn4, 1, 3);
         gp3.setHgap(30);
         gp3.setVgap(10);
         tab4.setContent(gp3);
         tb.getTabs().add(tab4);
+        
+        btn3.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                int borrowIDD = Integer.parseInt(tfBorrowId.getText()); 
+                try {
+                    Returns.insertReturns(borrowIDD, con);
+                } catch (SQLException ex) {
+                    Logger.getLogger(LibraryManagementSystemCA.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
 
         StackPane root = new StackPane();
         root.getChildren().add(tb);
-        
 
-                
-
-                
         Scene scene = new Scene(root, 1000, 500);
 
         primaryStage.setTitle("MyLibraryManagementSystemCA");
@@ -190,9 +209,7 @@ public class LibraryManagementSystemCA extends Application {
         primaryStage.show();
     }
 
-    /**
-     * @param args the command line arguments
-     */
+
     public static void main(String[] args) {
         launch(args);
     }
