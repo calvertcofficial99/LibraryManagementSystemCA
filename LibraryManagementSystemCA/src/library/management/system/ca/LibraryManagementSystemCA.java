@@ -2,6 +2,8 @@
 package library.management.system.ca;
 
 import Database.Database;
+import Database.Book;
+import Database.Person;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,14 +25,14 @@ import javafx.stage.Stage;
 public class LibraryManagementSystemCA extends Application {
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws ClassNotFoundException, SQLException {
         
         
                 //Code for person tab:
 
-        TextField name = new TextField();
-        TextField roll = new TextField();
-        TextField add = new TextField();
+        TextField tfname = new TextField();
+        TextField tfroll = new TextField();
+        TextField tfadd = new TextField();
 
         Label person_name = new Label("NAME: ");
         Label person_roll = new Label("ROLL NO: ");
@@ -38,37 +40,43 @@ public class LibraryManagementSystemCA extends Application {
 
         TabPane tb = new TabPane();
         Tab tab1 = new Tab("PERSON");
-
-        Button btn1 = new Button("SUBMIT");
         
-        btn1.setOnAction(new EventHandler<ActionEvent>() {
-            
-            @Override
-            public void handle(ActionEvent event) {
-                
-            }
-        });
+        Database d = new Database();
+        d.openConnection();
+        
+        Button btn1 = new Button("SUBMIT");
         
         GridPane gp = new GridPane();
         gp.add(person_name, 0, 0);
-        gp.add(name, 1, 0);
+        gp.add(tfname, 1, 0);
         gp.add(person_roll, 0, 1);
-        gp.add(roll, 1, 1);
+        gp.add(tfroll, 1, 1);
         gp.add(person_add, 0, 2);
-        gp.add(add, 1, 2);
+        gp.add(tfadd, 1, 2);
         gp.add(btn1, 1, 3);
         gp.setHgap(30);
         gp.setVgap(10);
         tab1.setContent(gp);
         tb.getTabs().add(tab1);
+        
+        btn1.setOnAction(new EventHandler<ActionEvent>() {
+            
+            @Override
+            public void handle(ActionEvent event) {
+                String personName = tfname.getText();
+                String personRoll = tfroll.getText();
+                String personAdd = tfadd.getText();
+                Person.insertPerson(personName,personRoll,personAdd, d);
+            }
+        });
 
                 //Code for book tab:
                 
                 
-        TextField b_name = new TextField();
-        TextField b_isbn = new TextField();
-        TextField b_auth = new TextField();
-        TextField b_pub = new TextField();
+        TextField tfBookName = new TextField();
+        TextField tfISBN = new TextField();
+        TextField tfAuth = new TextField();
+        TextField tfPubG = new TextField();
 
         Label book_name = new Label("NAME: ");
         Label book_isbn = new Label("ISBN: ");
@@ -80,18 +88,30 @@ public class LibraryManagementSystemCA extends Application {
         Tab tab2 = new Tab("BOOK");
         GridPane gp1 = new GridPane();
         gp1.add(book_name, 0, 0);
-        gp1.add(b_name, 1, 0);
+        gp1.add(tfBookName, 1, 0);
         gp1.add(book_isbn, 0, 1);
-        gp1.add(b_isbn, 1, 1);
+        gp1.add(tfISBN, 1, 1);
         gp1.add(book_auth, 0, 2);
-        gp1.add(b_auth, 1, 2);
+        gp1.add(tfAuth, 1, 2);
         gp1.add(book_pub, 0, 3);
-        gp1.add(b_pub, 1, 3);
+        gp1.add(tfPubG, 1, 3);
         gp1.add(btn2, 1, 4);
         gp1.setHgap(30);
         gp1.setVgap(10);
         tab2.setContent(gp1);
         tb.getTabs().add(tab2);
+        
+        btn2.setOnAction(new EventHandler<ActionEvent>() {
+            
+            @Override
+            public void handle(ActionEvent event) {
+                String bookName = tfBookName.getText();
+                String isbn = tfISBN.getText();
+                String author = tfAuth.getText();
+                String publisher = tfPubG.getText();
+                Book.insertBook(bookName,isbn,author,publisher,d);
+            }
+        });
 
                 //Code for borrow tab:
                 
@@ -99,9 +119,9 @@ public class LibraryManagementSystemCA extends Application {
         TextField p_name = new TextField();
         TextField bk_name = new TextField();
 
-        Label per_name = new Label("NAME: ");
-        Label bok_name = new Label("BOOK NAME: ");
-        Label borrow_d = new Label("BORROWED ON:");
+        Label per_id = new Label("Person id: ");
+        Label bok_id = new Label("book id: ");
+        Label borrow_id = new Label("borrows id : ");
 
         Button btn3 = new Button("SUBMIT");
 
@@ -109,11 +129,11 @@ public class LibraryManagementSystemCA extends Application {
 
         Tab tab3 = new Tab("BORROW A BOOK");
         GridPane gp2 = new GridPane();
-        gp2.add(per_name, 0, 0);
+        gp2.add(per_id, 0, 0);
         gp2.add(p_name, 1, 0);
-        gp2.add(bok_name, 0, 1);
+        gp2.add(bok_id , 0, 1);
         gp2.add(bk_name, 1, 1);
-        gp2.add(borrow_d, 0, 2);
+        gp2.add(borrow_id, 0, 2);
         gp2.add(dp, 1, 2);
         gp2.add(btn3, 1, 3);
         gp2.setHgap(30);

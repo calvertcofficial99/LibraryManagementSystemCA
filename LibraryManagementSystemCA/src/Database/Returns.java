@@ -16,16 +16,7 @@ import java.sql.SQLException;
  */
 public class Returns {
     
-    public int return_id;
-    public int borrow_id;
-    public String returned_on;
-     
-    public Returns(int borrow_id, String returned_on){
-        this.borrow_id=borrow_id;
-        this.returned_on=returned_on;
-    }
-    
-    public void insertReturns(Connection con) throws SQLException {
+    public void insertReturns(int borrow_id, String returned_on, Connection con) throws SQLException {
         String sql = "insert into returns values(null, ?, null);";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, borrow_id);

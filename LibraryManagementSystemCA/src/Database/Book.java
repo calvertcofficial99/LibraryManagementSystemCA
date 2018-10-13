@@ -15,16 +15,12 @@ import java.sql.SQLException;
  * @author Rahul
  */
 public class Book {
-    public int book_id;
-    public String book_name;
-    public String ISBN;
-    public String author;
-    public String publisher;
+
     
-    public void insertBook(Connection con) throws SQLException {
+    public static void insertBook(String bookName, String ISBN, String author, String publisher, Connection con) throws SQLException {
         String sql = "insert into book values(null, ?, ?, ?, ?);";
         PreparedStatement ps = con.prepareStatement(sql);
-        ps.setString(1, book_name);
+        ps.setString(1, bookName);
         ps.setString(2, ISBN);
         ps.setString(3, author);
         ps.setString(4, publisher);

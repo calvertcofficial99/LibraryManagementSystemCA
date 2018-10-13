@@ -15,14 +15,8 @@ import java.sql.SQLException;
  * @author Rahul
  */
 public class Borrow {
-    
-    public int borrow_id;
-    public int person_id;
-    public int book_id;
-    public String borrowed_on;
 
-    
-    public void insertBorrow(Connection con) throws SQLException {
+    public static void insertBorrow(int person_id, int book_id, String borrowed_on, Connection con) throws SQLException {
         String sql = "insert into borrow values(null, ?, ?, null);";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, person_id);
