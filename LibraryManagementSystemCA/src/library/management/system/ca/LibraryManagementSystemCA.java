@@ -4,6 +4,7 @@ package library.management.system.ca;
 import Database.Database;
 import Database.Book;
 import Database.Person;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,7 +43,7 @@ public class LibraryManagementSystemCA extends Application {
         Tab tab1 = new Tab("PERSON");
         
         Database d = new Database();
-        d.openConnection();
+        Connection c = d.openConnection();
         
         Button btn1 = new Button("SUBMIT");
         
@@ -66,7 +67,11 @@ public class LibraryManagementSystemCA extends Application {
                 String personName = tfname.getText();
                 String personRoll = tfroll.getText();
                 String personAdd = tfadd.getText();
-                Person.insertPerson(personName,personRoll,personAdd, d);
+                try {
+                    Person.insertPerson(personName,personRoll,personAdd, c);
+                } catch (SQLException ex) {
+                    Logger.getLogger(LibraryManagementSystemCA.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
 
@@ -109,7 +114,11 @@ public class LibraryManagementSystemCA extends Application {
                 String isbn = tfISBN.getText();
                 String author = tfAuth.getText();
                 String publisher = tfPubG.getText();
-                Book.insertBook(bookName,isbn,author,publisher,d);
+                try {
+                    Book.insertBook(bookName,isbn,author,publisher,c);
+                } catch (SQLException ex) {
+                    Logger.getLogger(LibraryManagementSystemCA.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
 
@@ -176,7 +185,7 @@ public class LibraryManagementSystemCA extends Application {
                 
         Scene scene = new Scene(root, 1000, 500);
 
-        primaryStage.setTitle("MyLibraryManagementSystemCA");
+        primaryStage.setTitle("MyLibraryManagementSystem");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
